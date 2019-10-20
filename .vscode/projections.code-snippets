@@ -1,0 +1,73 @@
+{
+    //----------------------------------------
+    // PROJECTIONS
+    //----------------------------------------
+    "proj.mask": {
+        "prefix": [
+            "proj:mask",
+        ],
+        "body": [
+            "{",
+            "${1:    for: '${3:permNameOrType}',}",
+            "${5:    on: ${6|'ALL','read','write','getAll','getOne','create','update'|},}",
+            "    mask: ${7|['${8:unauthorizedFieldName}'],async (ctx\\, mask) => ${8:fn}|},",
+            "},",
+        ]
+    },
+    "proj.setFields": {
+        "prefix": [
+            "proj:setFields",
+        ],
+        "body": [
+            "{",
+            "${1:    for: '${3:permNameOrType}',}",
+            "${5:    on: ${6|'ALL','read','write','getAll','getOne','create','update'|},}",
+            "    setFields: async (ctx, fields, filterForUpdate) => $7,",
+            "},",
+        ]
+    },
+    "proj.populate": {
+        "prefix": [
+            "proj:populate",
+        ],
+        "body": [
+            "{",
+            "${1:    for: '${3:permNameOrType}',}",
+            "${5:    on: ${6|'ALL','read','write','getAll','getOne','create','update'|},}",
+            "    populate: [${7:use object or string syntax here}]",
+            "},",
+        ]
+    },
+    "proj.filter": {
+        "prefix": [
+            "proj:filter",
+        ],
+        "body": [
+            "{",
+            "${1:    for: '${3:permNameOrType}',}",
+            "${5:    on: ${6|'ALL','read','write','getAll','getOne','create','update'|},}",
+            "    filter: async (ctx, filter) => ${7:modify the filter object or return it},",
+            "},",
+        ]
+    },
+    "proj.dictionnary": {
+        "prefix": [
+            "proj:dictionnary",
+        ],
+        "body": [
+            "${1:projectionName}: [${2:'field1', '-notToBePresent', 'populatedField[ALL]', 'populatedField2[subItem1,nestedPopulation[ALL]]'}],",
+        ]
+    },
+    "proj.hasAccess": {
+        "prefix": [
+            "proj:hasAccess",
+        ],
+        "body": [
+            "{",
+            "${1:    for: '${3:permNameOrType}',}",
+            "${5:    on: ${6|'ALL','read','write','getAll','getOne','create','update'|},}",
+            "    hasAccess: async ctx => ${7:return a boolean},",
+            "},",
+        ]
+    },
+}

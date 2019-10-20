@@ -1,0 +1,36 @@
+{
+    //----------------------------------------
+    // ERRORS
+    //----------------------------------------
+    "appError": {
+        "scope": "javascript,typescript",
+        "prefix": [
+            "appErr",
+            "err:applicationError"
+        ],
+        "body": [
+            "throw new ApplicationError($2,$1);",
+        ],
+        "description": "Fonction renvoyée a un route"
+    },
+    "404": {
+        "prefix": [
+            "e404",
+            "err:404"
+        ],
+        "body": [
+            "if(!isset($1)) throw new ApplicationError('${2:$1}DoNotExist',404);",
+            "$3"
+        ]
+    },
+    "err:newError": {
+        "prefix": "err:newError",
+        "body": [
+            "$1: {",
+            "    code: ${2|422,403,404,409,401,500|},",
+            "    fr: `$3`,",
+            "    en: `$4`,",
+            "},"
+        ]
+    },
+}

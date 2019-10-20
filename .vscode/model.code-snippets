@@ -1,0 +1,25 @@
+{
+    //----------------------------------------
+    // MODELS
+    //----------------------------------------
+    "model.objectId": {
+        "prefix": [
+            "model:objectId",
+        ],
+        "description": "model.type.ObjectId",
+        "body": [
+            "$1 : { type: 'objectId', ref: '${2:$1}' },",
+            "$3",
+        ]
+    },
+    "model.in": {
+        "prefix": [
+            "model:in",
+        ],
+        "description": "model.type.in",
+        "body": [
+            "$1 : { in: ['$2', '$3', $4] },",
+            "$5",
+        ]
+    },
+}

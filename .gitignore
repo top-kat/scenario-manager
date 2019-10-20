@@ -1,0 +1,56 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+#logs
+*.log
+
+# compiled output
+/dist
+tmp/
+cache/
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+*.launch
+.settings/
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db
+
+#visual studio history
+/.history
+/.nyc_output
+
+#replicated i18n
+client/groupapp/assets/i18n/*.json
+client/adminapp/assets/i18n/*.json
+client/indivapp/assets/i18n/*.json
+
+node-scripts/output
+node-scripts/input
+
+/server/config/environment/development-local.js
+
+# custom
+.jarvis
+tests/00_datas
+env.json
+data.json

@@ -1,0 +1,51 @@
+{
+    //----------------------------------------
+    // GENERAL
+    //----------------------------------------
+    "Commentaire": {
+        "scope": "javascript,typescript,md,markdown",
+        "prefix": "com",
+        "body": [
+            "//----------------------------------------",
+            "// $1",
+            "//----------------------------------------"
+        ],
+        "description": "Commentaire"
+    },
+    "fne": {
+        "prefix": "fne",
+        "description": "Function exports",
+        "body": [
+            "exports.$1 = $2 => {",
+            "    $3",
+            "};"
+        ]
+    },
+    "dataValid": {
+        "prefix": "datavalid",
+        "description": "require data validation utils",
+        "body": [
+            "const {$1} = require('@cawita/data-validation-utils/src');"
+        ]
+    },
+    "requireSnip": {
+        "scope": "javascript,typescript",
+        "prefix": "requireSnip",
+        "body": [
+            "const $1 = require('${2:$1}');"
+        ]
+    },
+    "ejsTemplate": {
+        "prefix": "ejs",
+        "body": [
+            "<%= $1 ${2:-}%>"
+        ]
+    },
+    "usestrict": {
+        "prefix": "usestrict",
+        "body": [
+            "'use strict';",
+            "$1"
+        ]
+    }
+}

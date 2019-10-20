@@ -1,0 +1,110 @@
+/* SIMPLE
+https://google-webfonts-helper.herokuapp.com/fonts/open-sans?subsets=latin
+*/
+
+
+
+/* open-sans-regular - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/open-sans-v17-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src: local('Open Sans Regular'), local('OpenSans-Regular'),
+        url('../fonts/open-sans-v17-latin-regular.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/open-sans-v17-latin-regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/open-sans-v17-latin-regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/open-sans-v17-latin-regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('../fonts/open-sans-v17-latin-regular.svg#OpenSans') format('svg');
+    /* Legacy iOS */
+}
+
+/* open-sans-700 - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/open-sans-v17-latin-700.eot');
+    /* IE9 Compat Modes */
+    src: local('Open Sans Bold'), local('OpenSans-Bold'),
+        url('../fonts/open-sans-v17-latin-700.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/open-sans-v17-latin-700.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/open-sans-v17-latin-700.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/open-sans-v17-latin-700.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('../fonts/open-sans-v17-latin-700.svg#OpenSans') format('svg');
+    /* Legacy iOS */
+}
+
+/* open-sans-800 - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/open-sans-v17-latin-800.eot');
+    /* IE9 Compat Modes */
+    src: local('Open Sans ExtraBold'), local('OpenSans-ExtraBold'),
+        url('../fonts/open-sans-v17-latin-800.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/open-sans-v17-latin-800.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/open-sans-v17-latin-800.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/open-sans-v17-latin-800.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('../fonts/open-sans-v17-latin-800.svg#OpenSans') format('svg');
+    /* Legacy iOS */
+}
+
+/* aldrich-regular - latin */
+@font-face {
+    font-family: 'Aldrich';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/aldrich-v10-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src: local('Aldrich Regular'), local('Aldrich-Regular'),
+        url('../fonts/aldrich-v10-latin-regular.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/aldrich-v10-latin-regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/aldrich-v10-latin-regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/aldrich-v10-latin-regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('../fonts/aldrich-v10-latin-regular.svg#Aldrich') format('svg');
+    /* Legacy iOS */
+}
+
+/* fallback */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/material-icons.woff2') format('woff2');
+}
+
+i {
+    cursor: pointer;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -moz-font-feature-settings: 'liga';
+    -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,295 @@
+body {
+    background-color: $bodyBackground;
+    color: $fontColorMain;
+    font-family: 'Open Sans';
+}
+
+a {
+    font-weight: bold;
+}
+
+b {
+    opacity: .45;
+}
+
+i {
+    font-size: 2.8rem;
+    opacity: .3;
+    vertical-align: middle;
+}
+
+i:hover,
+#nav-main li:hover,
+a:hover {
+    color: $primaryColor;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.input {
+    background: $panelBackground;
+    padding: 5px 10px;
+    margin: 8px 0;
+    color: $colorSoft;
+    $panelStyle;
+}
+
+textarea {
+    background-color: $panelBackground;
+    border: 0;
+    $panelStyle;
+}
+
+.new-comment textarea {
+    width: 80%;
+    float: right;
+    min-height: 45px;
+}
+
+.context-selected {
+    box-shadow: 0px 0px 9px 0px $primarySoft inset;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Aldrich';
+    margin: 15px 0;
+}
+
+h2 {
+    text-transform: uppercase;
+    opacity: .3;
+    font-size: 3rem;
+}
+
+h3 {
+    text-transform: uppercase;
+    opacity: .4;
+    font-size: 2rem;
+}
+
+main>section {
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+}
+
+#title-bar {
+    -webkit-app-region: drag;
+}
+
+#title-bar i {
+    -webkit-app-region: no-drag;
+    font-size: 20px;
+    line-height: 30px;
+    opacity: .6
+}
+
+#nav-main {
+    display: flex;
+}
+
+#nav-main ul {
+    list-style: none;
+    display: flex;
+    margin-bottom: 0;
+}
+
+#nav-main li {
+    padding: 5px 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: $mainNavColor;
+}
+
+aside {
+    background: $asideBackground;
+    position: relative;
+    height: calc(100vh - $menuSize);
+    flex: 0 0 28px;
+    overflow: hidden;
+    transition: all .4s;
+}
+
+aside.expanded {
+    flex: 0 0 180px;
+}
+
+#episode-extend2 {
+    display: none;
+}
+
+aside.expanded #episode-extend2 {
+    display: inline-block;
+}
+
+aside.expanded #episode-extend {
+    display: none;
+}
+
+aside>div {
+    position: absolute;
+    padding-top: 20px;
+    top: 0;
+    right: 0;
+    width: 180px;
+}
+
+main {
+    flex: 1 1;
+    background: $mainBackground;
+}
+
+aside .episode-nav-toolbar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+    width: 150px;
+}
+
+aside .episode-nav-toolbar i {
+    display: inline-block;
+    margin: 0;
+}
+
+.body-wrapper {
+    display: flex;
+}
+
+#nav-episodes>a {
+    display: block;
+}
+
+.line {
+    position: relative;
+    border-bottom: 1px $borderColor solid;
+    padding-left: 14px;
+}
+
+.over {
+    border-top: 2px solid rgb(34, 68, 61);
+}
+
+#main-toolbar {
+    position: fixed;
+    right: 15px;
+    bottom: 0;
+}
+
+.add-line-before {
+    top: 0;
+}
+
+.add-line-after {
+    bottom: 0;
+}
+
+#context-menu {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+#context-dropdown {
+    position: absolute;
+}
+
+.context-menu {
+    border-collapse: collapse;
+    background: $contextMenuBackground;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.context-menu td {
+    border: 0 transparent;
+    padding: 3px;
+    color: $contextMenuColor;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.context-menu tr:hover td,
+.context-menu tr:hover i {
+    color: $primaryColor;
+    opacity: 1;
+}
+
+.context-menu i {
+    vertical-align: middle;
+    opacity: .3;
+}
+
+.comments {
+    display: none;
+}
+
+.comments-expanded .comments {
+    display: block;
+}
+
+.draggable {
+    position: relative;
+}
+
+.draggable>.drag-handler {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 0;
+    z-index: 90;
+}
+
+.episode-link {
+    position: relative;
+    margin-left: 17px;
+}
+
+.episode-link>.drag-handler {
+    left: -17px;
+}
+
+.episode-link>.drag-handler i {
+    font-size: 1.7rem;
+    opacity: .3;
+}
+
+.comment {
+    border-bottom: 1px solid $borderColor;
+    background: $panelBackground;
+    margin: 10px 0;
+    $panelStyle;
+    margin-right: 15px;
+    display: flex;
+    position: relative;
+    padding: 10px 15px;
+}
+
+.comment i {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+
+.comment-user {
+    flex: 0 0 100px;
+}
+
+[contenteditable]:empty::after {
+    content: '...';
+    opacity: .5;
+}
+
+[contenteditable] {
+    min-width: 50px;
+}
+
+span[contenteditable] {
+    display: inline-block;
+}

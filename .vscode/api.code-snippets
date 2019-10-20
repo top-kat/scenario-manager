@@ -1,0 +1,20 @@
+{
+    //----------------------------------------
+    // API
+    //----------------------------------------
+    "middleware": {
+        "prefix": [
+            "mw",
+            "api:mw",
+            "mwfn",
+            "middlewareFn"
+        ],
+        "body": [
+            "${1:name}() {",
+            "    return this.fn(async (req, ctx) => {",
+            "        ${2:you can access activeDAO from here and use perm system (with care ;) )}",
+            "    });",
+            "}"
+        ]
+    },
+}

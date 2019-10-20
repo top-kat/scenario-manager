@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>SCENARIO</title>
+
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/skeleton.css">
+    <link rel="stylesheet" href="./css/resume.css">
+
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }
+    </script>
+    <script src="./libs/jquery.js"></script>
+    <script>if (window.module) module = window.module;</script>
+</head>
+
+<body>
+    <nav id="nav-main">
+        <ul id="main-nav-items">
+
+            <li id="personnages-main-menu-item" class="menu-item" data-section="chars">Personnages</li>
+            <li id="lieux-main-menu-item" class="menu-item" data-section="places">Lieux</li>
+        </ul>
+        <div id="title-bar" class="flex11 text-right">
+            <i id='title-bar-min'>minimize</i>
+            <i id='title-bar-full'>crop_square</i>
+            <i id='title-bar-close'>close</i>
+        </div>
+    </nav>
+
+    <div class='body-wrapper'>
+        <aside>
+            <div>
+                <div class="episode-nav-toolbar">
+                    <i id='new-episode'>add</i>
+                    <i id='episode-extend'>keyboard_arrow_right</i>
+                    <i id='episode-extend2'>keyboard_arrow_left</i>
+                </div>
+
+                <nav id="nav-episodes" data-context='4'>
+
+                </nav>
+            </div>
+        </aside>
+
+        <main>
+        </main>
+    </div>
+
+    <div id="main-toolbar">
+        <i id='expand-none' title='Expand none'>keyboard_arrow_up</i>
+        <i id='expand-all' title='Expand all'>keyboard_arrow_down</i>
+        <i id="open-db-in-vscode" class="rem4">insert_drive_file</i>
+    </div>
+
+    <div id="context-menu" style="display:none">
+        <div id="context-dropdown">
+            <div id="right-clic-menu-1" class="right-clic-menu">
+                <div class='resume-line-toolbar p2'>
+                    <table class="context-menu">
+                        <tr class='add-line-before'>
+                            <td><i>post_add</i></td>
+                            <td>Add line before</td>
+                        </tr>
+                        <tr class="add-alternative">
+                            <td><i>add</i></td>
+                            <td>Add an alternative</td>
+                        </tr>
+                        <tr class="add-comment">
+                            <td><i>add_comment</i></td>
+                            <td>Show/add comment</td>
+                        </tr>
+                        <tr class="expand-alternative">
+                            <td><i>expand_more</i></td>
+                            <td>Expand</td>
+                        </tr>
+                        <tr class='add-line-after'>
+                            <td><i>post_add</i></td>
+                            <td>Add line after</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div id="right-clic-menu-2" class="right-clic-menu">
+                <div class='resume-line-toolbar p2'>
+                    <table class="context-menu">
+                        <tr class='add-line-before'>
+                            <td><i>post_add</i></td>
+                            <td>Add line before</td>
+                        </tr>
+                        <tr class="add-comment">
+                            <td><i>add_comment</i></td>
+                            <td>Show/add comment</td>
+                        </tr>
+                        <tr class="delete-line">
+                            <td><i>delete_forever</i></td>
+                            <td>Delete line</td>
+                        </tr>
+                        <tr class='add-line-after'>
+                            <td><i>post_add</i></td>
+                            <td>Add line after</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="right-clic-menu-3" class="right-clic-menu">
+                <div class='resume-line-toolbar p2'>
+                    <table class="context-menu">
+                        <tr class='add-line-before'>
+                            <td><i>post_add</i></td>
+                            <td>Add line before</td>
+                        </tr>
+                        <tr class="add-comment">
+                            <td><i>add_comment</i></td>
+                            <td>Show/add comment</td>
+                        </tr>
+                        <tr class="delete-line">
+                            <td><i>delete_forever</i></td>
+                            <td>Delete line</td>
+                        </tr>
+                        <tr class="expand-alternative">
+                            <td><i>expand_more</i></td>
+                            <td>Expand</td>
+                        </tr>
+                        <tr class="add-section">
+                            <td><i>playlist_add</i></td>
+                            <td>Add section</td>
+                        </tr>
+                        <tr class='add-line-after'>
+                            <td><i>post_add</i></td>
+                            <td>Add line after</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--
+                EPISODE MENU
+            -->
+            <div id="right-clic-menu-4" class="right-clic-menu">
+                <div class='resume-line-toolbar p2'>
+                    <table class="context-menu">
+                        <tr class='add-line-before'>
+                            <td><i>post_add</i></td>
+                            <td>Add line before</td>
+                        </tr>
+                        <tr class="delete-line-episode">
+                            <td><i>delete_forever</i></td>
+                            <td>Delete line</td>
+                        </tr>
+                        <tr class='add-line-after'>
+                            <td><i>post_add</i></td>
+                            <td>Add line after</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
