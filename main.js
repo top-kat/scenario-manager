@@ -9,6 +9,7 @@ require('electron-reload')(__dirname, {
     ignored: /node_modules|[/\\]\.|\.json/, //'*.json',
 });
 
+require('update-electron-app')();
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -28,9 +29,9 @@ function createWindow() {
         }
     });
 
-
     // and load the index.html of the app.
     mainWindow.loadFile('index.html');
+
     mainWindow.setMenuBarVisibility(false);
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()

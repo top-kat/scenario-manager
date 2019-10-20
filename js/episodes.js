@@ -32,27 +32,24 @@ const genericLineTemplate = (modul, line, commentTemplate) => `
 module.exports = {
     init() {
 
-        Config = DB.config;
         this.episodeDefaults();
 
-        for (const episode of DB.episodes) {
+        //if (!ActiveDocument.episodes.length) this.newEpisode();
+
+        for (const episode of ActiveDocument.episodes) {
             $('#nav-episodes').append(episodeLinkTemplate(episode.name));
         }
 
         //----------------------------------------
         // buttons
         //----------------------------------------
-        btn('#new-episode', () => {
-            $('#nav-episodes').append(episodeLinkTemplate('New episode name'));
-            Refresh();
-            this.episodeDefaults();
-        });
+        btn('#new-episode', () => this.newEpisode());
         btn('#episode-extend, #episode-extend2', () => {
             $('aside').toggleClass('expanded');
-            DB.config.episodePanelExpanded = $('aside').hasClass('expanded');
+            Config.episodePanelExpanded = $('aside').hasClass('expanded');
         });
 
-        if (DB.config.episodePanelExpanded) $('aside').addClass('expanded');
+        if (Config.episodePanelExpanded) $('aside').addClass('expanded');
 
         this.changeEpisode(ActiveEpisode, true);
 
@@ -68,7 +65,7 @@ module.exports = {
         rightClicMenu('.delete-line-episode', '.episode-link', item => {
             if (confirm('Are you sure you want to delete the entire episode ?')) {
                 const index = item.index();
-                DB.episodes.splice(index, 1);
+                ActiveDocument.episodes.splice(index, 1);
                 item.remove();
             }
         });
@@ -85,22 +82,22 @@ module.exports = {
     // default episodes for new ones
     episodeDefaults() {
         $('.episode-link').each(function(i) {
-            if (!isset(DB.episodes[i])) DB.episodes[i] = newEpisodeModel();
+            if (!isset(ActiveDocument.episodes[i])) ActiveDocument.episodes[i] = newEpisodeModel();
         });
     },
     changeEpisode(index = 0, doNotSave = false) {
         if (!doNotSave) SAVE();
         $('main, #main-nav-items').html('');
 
-        DB.config.activeEpisode = index;
-        ActiveEpisode = DB.episodes[index].config;
+        Config.activeEpisode = index;
+        ActiveEpisode = ActiveDocument.episodes[index].config;
 
         for (const modul of [resume, chars, chronology, places]) {
 
             const name = modul.name;
 
-            $('main').append(`<section id='${name}' class='panel' style='${ActivePanel === name ? '' : 'display:none'}'></section>`);
-            $('#main-nav-items').append(`<li id="${modul.name}-main-menu-item" class="menu-item${ActivePanel === name ? ' active':''}" data-section="${modul.name}">${modul.displayName}</li>`);
+            $('main').append(`<section id='${name}' class='panel' style='${Config.activePanel === name ? '' : 'display:none'}'></section>`);
+            $('#main-nav-items').append(`<li id="${modul.name}-main-menu-item" class="menu-item${Config.activePanel === name ? ' active':''}" data-section="${modul.name}">${modul.displayName}</li>`);
 
             const $section = $(`#${name}`);
             $section.html('');
@@ -138,7 +135,14 @@ module.exports = {
         Refresh();
     },
     onSave() {
-        const index = DB.config.activeEpisode;
-        DB.episodes[index].name = $('.episode-link').eq(index).find('a').html();
+        const index = Config.activeEpisode;
+        console.log(`Config`, Config);
+        console.log(`index`, index);
+        ActiveDocument.episodes[index].name = $('.episode-link').eq(index).find('a').html();
+    },
+    newEpisode() {
+        $('#nav-episodes').append(episodeLinkTemplate(''));
+        this.episodeDefaults();
+        Refresh();
     }
 };

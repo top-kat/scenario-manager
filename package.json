@@ -4,16 +4,20 @@
     "description": "A smart, zen application to manage comics, movie or novel scenarios",
     "homepage": "http://scenario-manager.net",
     "main": "main.js",
-    "author": "538ROMEO",
-    "repository": "",
+    "author": "sebRomeo",
+    "repository": "https://github.com/sebRomeo/scenario-manager",
     "scripts": {
         "start": "electron .",
         "pack": "electron-builder --dir",
-        "dist": "electron-builder"
+        "dist": "electron-builder -mwl"
     },
     "build": {
         "appId": "net.scenario-manager",
-        "copyright": "538ROMEO"
+        "copyright": "sebRomeo",
+        "linux": {
+            "maintainer": "sebRomeo",
+            "category": "Office"
+        }
     },
     "keywords": [
         "Electron",
@@ -30,6 +34,7 @@
     "dependencies": {
         "@cawita/data-validation-utils": "^1.0.90",
         "electron-reload": "^1.5.0",
-        "jquery": "^3.4.1"
+        "jquery": "^3.4.1",
+        "update-electron-app": "^1.5.0"
     }
 }

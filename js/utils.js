@@ -1,11 +1,11 @@
 global.activeElement;
-global.DB;
-global.ActiveEpisode;
-global.ActivePanel = 'resume';
-global.Config;
+global.AppConfig;
+global.ActiveEpisode = 0;
+global.ActiveDocument = null;
+global.Config = null;
 global.btn = btn;
 global.rightClicMenu = rightClicMenu;
-global.DBSAVE = () => true;
+global.SAVEALL = () => true;
 global.OnSave = OnSave;
 global.SAVE = SAVE;
 global.OnRefresh = OnRefresh;
@@ -40,7 +40,7 @@ function rightClicMenu(itemMenuClass, closestParentSelector, callback) {
 // ITEM INSERT
 //----------------------------------------
 function ItemInsertManager(context, closestParentSelector, template) {
-    if (ActivePanel === context) {
+    if (Config.activePanel === context) {
         rightClicMenu('.add-line-before', closestParentSelector, item => {
             item.before(template);
             Refresh();
@@ -67,7 +67,7 @@ function OnSave(...fns) {
 
 function SAVE() {
     for (const fn of saveFunctions) fn();
-    DBSAVE();
+    SAVEALL();
 }
 
 setInterval(SAVE, 1000);
