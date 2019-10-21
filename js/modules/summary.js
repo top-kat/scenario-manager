@@ -7,8 +7,8 @@ const alternativeTemplate = (title = 'Title', content = 'Content') => `
 `;
 
 module.exports = {
-    name: 'resume',
-    displayName: 'Scenario',
+    name: 'summary',
+    displayName: 'Summary',
     contextMenuIndex: 1,
     init() {
         rightClicMenu('.add-alternative', '.line', item => {
@@ -28,10 +28,10 @@ module.exports = {
             commentExpanded: false,
         };
     },
-    lineTemplate(resume = this.defaultItemInDb()) {
+    lineTemplate(summary = this.defaultItemInDb()) {
         return `
         <div class='alternatives flex'>
-            ${resume.alternatives.map(alt => alternativeTemplate(alt.title, alt.content)).join('')}
+            ${summary.alternatives.map(alt => alternativeTemplate(alt.title, alt.content)).join('')}
         </div>`;
     },
     OnRefresh() {

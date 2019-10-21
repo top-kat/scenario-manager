@@ -1,4 +1,4 @@
-const resume = require('./modules/resume');
+const summary = require('./modules/summary');
 const chars = require('./modules/chars');
 const places = require('./modules/places');
 const chronology = require('./modules/chronology');
@@ -10,7 +10,7 @@ const episodeLinkTemplate = name => `<div class='episode-link context-select dra
 const newEpisodeModel = () => ({
     name: '',
     config: {
-        resume: []
+        summary: []
     }
 });
 
@@ -61,7 +61,7 @@ module.exports = {
 
         OnSave(this.onSave);
 
-        for (const modul of [resume, chars, chronology, places]) modul.init();
+        for (const modul of [summary, chars, chronology, places]) modul.init();
 
 
         rightClicMenu('.delete-line-episode', '.episode-link', item => {
@@ -95,7 +95,7 @@ module.exports = {
         Config.activeEpisode = index;
         ActiveEpisode = ActiveDocument.episodes[index].config;
 
-        for (const modul of [resume, chars, chronology, places]) {
+        for (const modul of [summary, chars, chronology, places]) {
 
             const name = modul.name;
 
@@ -107,7 +107,7 @@ module.exports = {
             if (!isset(ActiveEpisode[name])) ActiveEpisode[name] = [];
             if (!ActiveEpisode[name].length) ActiveEpisode[name].push(modul.defaultItemInDb());
 
-            // feed resume lines
+            // feed summary lines
             for (const line of ActiveEpisode[name]) {
                 $section.append(genericLineTemplate(modul, line, this.commentTemplate));
             }

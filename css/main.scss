@@ -92,6 +92,12 @@ main>section {
     overflow-y: auto;
 }
 
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
 #title-bar {
     -webkit-app-region: drag;
 }
@@ -331,4 +337,48 @@ span[contenteditable] {
 #no-document-overlay,
 #preloader {
     background-color: $mainBackground;
+}
+
+.alternative-content {
+    display: none;
+    padding: 10px 15px;
+    opacity: .7;
+}
+
+.expanded .alternative-content {
+    display: block;
+}
+
+.delete-alternative {
+    float: right;
+    font-size: 2rem;
+}
+
+.alternative-title {
+    padding: 5px 15px;
+}
+
+.char {
+    padding: 30px 15px;
+}
+
+.char>div {
+    padding: 3px;
+}
+
+.date {
+    padding: 15px;
+}
+
+.date>div {
+    display: inline-block;
+}
+
+.date b {
+    opacity: .6;
+    margin-right: 35px;
+}
+
+.place {
+    padding: 30px 15px;
 }
