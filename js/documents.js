@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const episodes = require('./episodes');
 const { isset } = require('@cawita/data-validation-utils/src');
 
 try {
@@ -37,15 +38,16 @@ const documents = {
         lengthBefore = JSON.stringify(content, null, 2);
         this.setActive(content, fileName);
     },
-    openDocument(dialog, fileName = '') {
+    openDocument(dialog, fileName = '', noErr = false) {
         if (!fileName) fileName = dialog.showOpenDialogSync({
             title: 'Open scenario',
             buttonLabel: 'Open',
         });
         try {
-            var content = fs.readFileSync(fileName, 'utf-8');
+            var content = JSON.parse(fs.readFileSync(fileName, 'utf-8'));
         } catch (err) {
-            alert('wrong format for file');
+            if (!noErr) alert('wrong format for file');
+            else return false;
         }
         this.setActive(content, fileName);
     },
@@ -57,6 +59,8 @@ const documents = {
         if (!Config.activePanel) Config.activePanel = 'resume';
         // if (!Config.activeEpisode) Config.activeEpisode = 0;
         lengthBefore = JSON.stringify(ActiveDocument, null, 2);
+        episodes.init();
+        $('#no-document-overlay').hide(0);
     },
     save() {
         if (!isset(ActiveDocument) || !ActiveDocument) return;

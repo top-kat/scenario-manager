@@ -7,22 +7,41 @@
 
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/skeleton.css">
     <link rel="stylesheet" href="./css/resume.css">
+    <style>
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            z-index: 1000;
+        }
 
-    <script>if (typeof module === 'object') { window.module = module; module = undefined; }
+    </style>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+
     </script>
     <script src="./libs/jquery.js"></script>
-    <script>if (window.module) module = window.module;</script>
+    <script>
+        if (window.module) module = window.module;
+
+    </script>
 </head>
 
 <body>
+    <div id="preloader" class='ol'></div>
     <nav id="nav-main">
-        <div id="app-menu">
+        <div id="app-menu" class="dropdown-toggle">
             <i>menu</i>
-            <div id="app-menu-dropdown">
-                <div id="app-menu-new">New</div>
-                <div id="app-menu-open">Open</div>
+            <div id="app-menu-dropdown" class="dropdown">
+                <a id="app-menu-new" class="new-document">New</a>
+                <a id="app-menu-open" class="open-document">Open</a>
             </div>
         </div>
         <ul id="main-nav-items">
@@ -37,6 +56,7 @@
     <div class='body-wrapper'>
         <aside>
             <div>
+                <b>Episodes</b>
                 <div class="episode-nav-toolbar">
                     <i id='new-episode'>add</i>
                     <i id='episode-extend'>keyboard_arrow_right</i>
@@ -57,6 +77,11 @@
         <i id='expand-none' title='Expand none'>keyboard_arrow_up</i>
         <i id='expand-all' title='Expand all'>keyboard_arrow_down</i>
         <i id="open-db-in-vscode" class="rem4">insert_drive_file</i>
+    </div>
+
+    <div id="no-document-overlay" class="center column ol">
+        <div class="btn new-document">New document...</div>
+        <div class="btn open-document">Open document...</div>
     </div>
 
     <div id="context-menu" style="display:none">

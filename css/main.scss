@@ -70,6 +70,23 @@ h3 {
     font-size: 2rem;
 }
 
+.dropdown-toggle {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    padding: 10px 15px;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+}
+
+.dropdown.active {
+    display: block;
+}
+
 main>section {
     max-height: calc(100vh - 32px);
     overflow-y: auto;
@@ -88,6 +105,9 @@ main>section {
 
 #nav-main {
     display: flex;
+    background-color: $mainNavBackground;
+    z-index: 999;
+    position: relative;
 }
 
 #nav-main ul {
@@ -101,6 +121,16 @@ main>section {
     margin-bottom: 0;
     font-weight: bold;
     color: $mainNavColor;
+}
+
+#app-menu-dropdown {
+    background: $mainNavBackground;
+    padding: 0 15px 10px;
+    font-weight: bold;
+}
+
+#app-menu-dropdown a {
+    display: block;
 }
 
 aside {
@@ -130,10 +160,14 @@ aside.expanded #episode-extend {
 
 aside>div {
     position: absolute;
-    padding-top: 20px;
     top: 0;
     right: 0;
     width: 180px;
+}
+
+aside>div>b {
+    margin: 4px;
+    display: inline-block;
 }
 
 main {
@@ -292,4 +326,9 @@ aside .episode-nav-toolbar i {
 
 span[contenteditable] {
     display: inline-block;
+}
+
+#no-document-overlay,
+#preloader {
+    background-color: $mainBackground;
 }

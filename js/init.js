@@ -19,13 +19,19 @@ try {
         $('#title-bar-min').click(() => BrowserWindow.getFocusedWindow().minimize());
         $('#title-bar-full').click(() => BrowserWindow.getFocusedWindow().setFullScreen(!BrowserWindow.getFocusedWindow().isFullScreen()));
         $('#title-bar-close').click(() => BrowserWindow.getFocusedWindow().close());
-        $('#app-menu-new').click(() => documents.newDocument(dialog));
-        $('#app-menu-open').click(() => documents.openDocument(dialog));
+        $('.new-document').click(() => documents.newDocument(dialog));
+        $('.open-document').click(() => documents.openDocument(dialog));
+        $('.dropdown-toggle').click(function(e) {
+            $(this).find('.dropdown').toggleClass('active');
+        });
+        $(document).click(function(event) {
+            $target = $(event.target);
+            if (!$target.hasClass('dropdown') && !$target.closest('.dropdown,.dropdown-toggle').length) $('.dropdown').removeClass('active');
+        });
 
-        if (Object.keys(AppConfig).length === 0) documents.newDocument(dialog);
-        else documents.openDocument(dialog, AppConfig.activeDocument);
+        if (Object.keys(AppConfig).length === 0 || !AppConfig.activeDocument) true;
+        else documents.openDocument(dialog, AppConfig.activeDocument, true);
 
-        episodes.init();
 
         //----------------------------------------
         // TOOLBAR
@@ -99,6 +105,7 @@ try {
         // STYLES
         //----------------------------------------
         const files = [
+            '../css/theme.scss',
             '../css/main.scss',
         ];
         for (const file of files) {
@@ -108,7 +115,9 @@ try {
         }
 
         Refresh();
+
+        setTimeout(() => $('#preloader').fadeOut(300), 300);
     });
 } catch (err) {
-    console.error(err);
+    C.error(err);
 }

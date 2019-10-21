@@ -32,6 +32,8 @@ const genericLineTemplate = (modul, line, commentTemplate) => `
 module.exports = {
     init() {
 
+        if (this.hasBeenInitializated) return;
+
         this.episodeDefaults();
 
         //if (!ActiveDocument.episodes.length) this.newEpisode();
@@ -81,6 +83,7 @@ module.exports = {
     },
     // default episodes for new ones
     episodeDefaults() {
+        if (!isset(ActiveDocument.episodes[0])) ActiveDocument.episodes[0] = newEpisodeModel();
         $('.episode-link').each(function(i) {
             if (!isset(ActiveDocument.episodes[i])) ActiveDocument.episodes[i] = newEpisodeModel();
         });
@@ -136,8 +139,6 @@ module.exports = {
     },
     onSave() {
         const index = Config.activeEpisode;
-        console.log(`Config`, Config);
-        console.log(`index`, index);
         ActiveDocument.episodes[index].name = $('.episode-link').eq(index).find('a').html();
     },
     newEpisode() {
