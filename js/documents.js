@@ -39,7 +39,7 @@ const documents = {
         this.setActive(content, fileName);
     },
     openDocument(dialog, fileName = '', noErr = false) {
-        if (!fileName) fileName = dialog.showOpenDialogSync({
+        if (!fileName)[fileName] = dialog.showOpenDialogSync({
             title: 'Open scenario',
             buttonLabel: 'Open',
         });
