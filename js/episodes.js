@@ -35,6 +35,7 @@ module.exports = {
         if (this.hasBeenInitializated) return;
 
         this.episodeDefaults();
+        $('#nav-episodes').html('');
 
         //if (!ActiveDocument.episodes.length) this.newEpisode();
 
@@ -53,7 +54,7 @@ module.exports = {
 
         if (Config.episodePanelExpanded) $('aside').addClass('expanded');
 
-        this.changeEpisode(ActiveEpisode, true);
+        this.changeEpisode(Config.activeEpisode, true);
 
         OnRefresh(() => {
             btn('.episode-link > a', item => this.changeEpisode(item.parent().index()));
@@ -91,7 +92,8 @@ module.exports = {
     changeEpisode(index = 0, doNotSave = false) {
         if (!doNotSave) SAVE();
         $('main, #main-nav-items').html('');
-
+        console.log(`index`, index);
+        console.log(`ActiveDocument.episodes`, ActiveDocument.episodes);
         Config.activeEpisode = index;
         ActiveEpisode = ActiveDocument.episodes[index].config;
 

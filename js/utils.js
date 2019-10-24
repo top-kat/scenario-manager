@@ -1,6 +1,6 @@
-global.activeElement;
+global.activeElement; // for right click
 global.AppConfig;
-global.ActiveEpisode = 0;
+global.ActiveEpisode = null;
 global.ActiveDocument = null;
 global.Config = null;
 global.btn = btn;
@@ -66,6 +66,7 @@ function OnSave(...fns) {
 }
 
 function SAVE() {
+    if (!ActiveDocument) return;
     for (const fn of saveFunctions) fn();
     SAVEALL();
 }

@@ -21,7 +21,8 @@ try {
         $('#title-bar-close').click(() => BrowserWindow.getFocusedWindow().close());
         $('.new-document').click(() => documents.newDocument(dialog));
         $('.open-document').click(() => documents.openDocument(dialog));
-        $('.dropdown-toggle').click(function(e) {
+        $('.close-document').click(() => documents.closeDocument());
+        $('.dropdown-toggle').click(function() {
             $(this).find('.dropdown').toggleClass('active');
         });
         $(document).click(function(event) {
@@ -110,7 +111,6 @@ try {
         ];
         for (const file of files) {
             const content = fs.readFileSync(path.resolve(__dirname, file), 'utf-8');
-
             $('head').append($(`<style>${content.replace(/\$([A-Za-z0-9_]+)/g, (m,$1) => isset(theme[$1]) ?theme[$1] : C.warning(`${$1} not set in theme`) )}</style>`));
         }
 

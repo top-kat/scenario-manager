@@ -51,14 +51,18 @@ const documents = {
         }
         this.setActive(content, fileName);
     },
+    closeDocument() {
+        $('#no-document-overlay').show(0);
+        ActiveDocument = undefined;
+    },
     setActive(content, fileName) {
         if (!content || typeof content !== 'object') return alert('Save file may have been corrupted\n\nIf you think this is an issue, please contact webmaster@nicewebagence.com');
         this.save();
+        console.log(`JSON.stringify(content)`, JSON.stringify(content, null, 2));
         ActiveDocument = content;
         AppConfig.activeDocument = fileName;
         Config = ActiveDocument.config;
         if (!Config.activePanel) Config.activePanel = 'summary';
-        // if (!Config.activeEpisode) Config.activeEpisode = 0;
         lengthBefore = JSON.stringify(ActiveDocument, null, 2);
         episodes.init();
         $('#no-document-overlay').hide(0);
