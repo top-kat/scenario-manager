@@ -2,7 +2,9 @@ module.exports = {
     name: 'chars',
     displayName: 'Characters',
     contextMenuIndex: 2,
-    init() {},
+    order: 2,
+    onAppLoad() {},
+    onDocumentLoad() {},
     defaultItemInDb() {
         return {
             name: '',

@@ -388,3 +388,21 @@ span[contenteditable] {
 .place {
     padding: 30px 15px;
 }
+
+.expand,
+.compact {
+    float: left;
+    margin-left: 5px;
+}
+
+.compact {
+    display: none;
+}
+
+.expanded .compact {
+    display: block;
+}
+
+.expanded .expand {
+    display: none;
+}

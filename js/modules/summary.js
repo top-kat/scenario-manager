@@ -1,6 +1,8 @@
 const alternativeTemplate = (title = 'Title', content = 'Content') => `
 <div class='alternative flex11'>
-    <i class="delete-alternative">close</i>
+<i class="delete-alternative">close</i>
+<i class="expand">keyboard_arrow_down</i>
+<i class="compact">keyboard_arrow_up</i>
     <div class='alternative-title' contenteditable="true">${title}</div>
     <div class='alternative-content' contenteditable="true">${content}</div>
 </div>
@@ -9,14 +11,16 @@ const alternativeTemplate = (title = 'Title', content = 'Content') => `
 module.exports = {
     name: 'summary',
     displayName: 'Summary',
+    order: 0,
     contextMenuIndex: 1,
-    init() {
-        rightClicMenu('.add-alternative', '.line', item => {
+    onAppLoad() {
+        rightClicMenu(this.contextMenuIndex, '.add-alternative', '.line', item => {
             item.find('.alternatives').append(alternativeTemplate());
             Refresh();
         });
-        rightClicMenu('.expand-alternative', '.line', item => item.toggleClass('expanded'));
+        rightClicMenu(this.contextMenuIndex, '.expand', '.line', item => item.toggleClass('expanded'));
     },
+    onDocumentLoad() {},
     defaultItemInDb() {
         return {
             comments: [],

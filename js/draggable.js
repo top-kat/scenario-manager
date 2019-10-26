@@ -49,7 +49,6 @@ module.exports = {
             if (dragSrcEl[0] != $targetParent[0]) {
                 const container = dragSrcEl.parent().get(0);
                 // Set the source column's HTML to the HTML of the column we dropped on.
-                //alert(this.outerHTML);
                 //dragSrcEl.innerHTML = this.innerHTML;
                 //this.innerHTML = e.dataTransfer.getData('text/html');
                 container.removeChild(dragSrcEl.get(0));

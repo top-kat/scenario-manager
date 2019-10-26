@@ -1,18 +1,18 @@
+require('./utils');
+const documents = require('./documents');
+
+const { BrowserWindow, dialog } = require('electron').remote;
+
+const draggable = require('./draggable');
+const episodes = require('./episodes');
+const theme = require('./theme');
+const { openInCodeEditor } = require('@cawita/data-validation-utils/src/back-end-utils');
+const path = require('path');
+const fs = require('fs');
+
+const { isset, C } = require('@cawita/data-validation-utils/src');
+
 try {
-    require('./utils');
-    const documents = require('./documents');
-
-    const { BrowserWindow, dialog } = require('electron').remote;
-
-    const draggable = require('./draggable');
-    const episodes = require('./episodes');
-    const theme = require('./theme');
-    const { openInCodeEditor } = require('@cawita/data-validation-utils/src/back-end-utils');
-    const path = require('path');
-    const fs = require('fs');
-
-    const { isset, C } = require('@cawita/data-validation-utils/src');
-
     window.addEventListener('DOMContentLoaded', () => {
 
         // TITLE APP BAR
@@ -74,10 +74,12 @@ try {
                     }
                 });
             },
-            //
-            () => {
-                btn('.delete-parent', item => confirm('Are you sure that you want to delete this item ?') && item.parent().remove());
-            }
+            // EXPAND / COMPACT BEHAVIOR
+            () => $('.expand').click(function() { $(this).closest('.line').addClass('expanded'); }),
+            () => $('.compact').click(function() { $(this).closest('.line').removeClass('expanded'); }),
+            // DELETE PARENT
+            () => btn('.delete-parent', item => confirm('Are you sure that you want to delete this item ?') && item.parent().remove())
+
         );
 
         //----------------------------------------
@@ -86,7 +88,7 @@ try {
         $('#context-menu').click(function() {
             $('#context-menu').fadeOut(50);
             $('.context-selected').removeClass('context-selected');
-            activeElement = undefined;
+            activeElement = null;
         });
         $('body').contextmenu(function(e) {
             $('#context-menu').hide(0);
@@ -114,10 +116,13 @@ try {
             $('head').append($(`<style>${content.replace(/\$([A-Za-z0-9_]+)/g, (m,$1) => isset(theme[$1]) ?theme[$1] : C.warning(`${$1} not set in theme`) )}</style>`));
         }
 
+        episodes.onAppLoad();
+
         Refresh();
 
         setTimeout(() => $('#preloader').fadeOut(300), 300);
     });
 } catch (err) {
+    DISABLEAUTOSAVE = true;
     C.error(err);
 }

@@ -2,7 +2,9 @@ module.exports = {
     name: 'chronology',
     displayName: 'Chronology',
     contextMenuIndex: 2,
-    init() {},
+    order: 3,
+    onAppLoad() {},
+    onDocumentLoad() {},
     defaultItemInDb() {
         return {
             date: '',

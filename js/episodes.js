@@ -1,11 +1,16 @@
-const summary = require('./modules/summary');
-const chars = require('./modules/chars');
-const places = require('./modules/places');
-const chronology = require('./modules/chronology');
+const path = require('path');
+const fs = require('fs');
+const normalizedPath = path.join(__dirname, 'modules');
 
-const { isset } = require('@cawita/data-validation-utils/src');
+const registeredModules = [];
+fs.readdirSync(normalizedPath).forEach(function(file) {
+    registeredModules.push(require('./modules/' + file));
+});
+registeredModules.sort((a, b) => a.order - b.order);
 
-const episodeLinkTemplate = name => `<div class='episode-link context-select draggable'><a contenteditable="true">${name}</a></div>`;
+const { isset, generateToken } = require('@cawita/data-validation-utils/src');
+
+const episodeLinkTemplate = (name = '', id = generateToken()) => `<div class='episode-link context-select draggable' data-id="${id}"><a contenteditable="true">${name}</a></div>`;
 
 const newEpisodeModel = () => ({
     name: '',
@@ -30,19 +35,7 @@ const genericLineTemplate = (modul, line, commentTemplate) => `
 `;
 
 module.exports = {
-    init() {
-
-        if (this.hasBeenInitializated) return;
-
-        this.episodeDefaults();
-        $('#nav-episodes').html('');
-
-        //if (!ActiveDocument.episodes.length) this.newEpisode();
-
-        for (const episode of ActiveDocument.episodes) {
-            $('#nav-episodes').append(episodeLinkTemplate(episode.name));
-        }
-
+    onAppLoad() {
         //----------------------------------------
         // buttons
         //----------------------------------------
@@ -54,25 +47,29 @@ module.exports = {
 
         if (Config.episodePanelExpanded) $('aside').addClass('expanded');
 
-        this.changeEpisode(Config.activeEpisode, true);
-
         OnRefresh(() => {
-            btn('.episode-link > a', item => this.changeEpisode(item.parent().index()));
+            btn('.episode-link > a', item => this.changeEpisode(item.parent().data('id')));
         });
 
-        OnSave(this.onSave);
+        OnSave(this.onSave.bind(this));
 
-        for (const modul of [summary, chars, chronology, places]) modul.init();
+        for (const modul of registeredModules) modul.onAppLoad && modul.onAppLoad();
 
+        ItemInsertManager(4, '.episode-link', episodeLinkTemplate());
 
-        rightClicMenu('.delete-line-episode', '.episode-link', item => {
-            if (confirm('Are you sure you want to delete the entire episode ?')) {
-                const index = item.index();
-                ActiveDocument.episodes.splice(index, 1);
-                item.remove();
-            }
-        });
+    },
+    onDocumentLoad() {
+        this.episodeDefaults();
+        for (const modul of registeredModules) modul.onDocumentLoad && modul.onDocumentLoad();
 
+        $('#nav-episodes').html('');
+
+        for (const episodeId in ActiveDocument.episodes) {
+            const episode = ActiveDocument.episodes[episodeId];
+            $('#nav-episodes').append(episodeLinkTemplate(episode.name, episodeId));
+        }
+
+        this.changeEpisode(Config.activeEpisode, true);
     },
     commentTemplate(comment) {
         return `
@@ -84,20 +81,25 @@ module.exports = {
     },
     // default episodes for new ones
     episodeDefaults() {
-        if (!isset(ActiveDocument.episodes[0])) ActiveDocument.episodes[0] = newEpisodeModel();
-        $('.episode-link').each(function(i) {
-            if (!isset(ActiveDocument.episodes[i])) ActiveDocument.episodes[i] = newEpisodeModel();
+        // default if no episode is set
+        if (Object.keys(ActiveDocument.episodes).length === 0) ActiveDocument.episodes[generateToken()] = newEpisodeModel();
+
+        // if link as been created but not episode in data
+        $('.episode-link').each(function() {
+            const newEpId = $(this).data('id');
+            if (!isset(ActiveDocument.episodes[newEpId])) ActiveDocument.episodes[newEpId] = newEpisodeModel();
         });
     },
-    changeEpisode(index = 0, doNotSave = false) {
+    changeEpisode(episodeId, doNotSave = false) {
         if (!doNotSave) SAVE();
         $('main, #main-nav-items').html('');
-        console.log(`index`, index);
-        console.log(`ActiveDocument.episodes`, ActiveDocument.episodes);
-        Config.activeEpisode = index;
-        ActiveEpisode = ActiveDocument.episodes[index].config;
 
-        for (const modul of [summary, chars, chronology, places]) {
+        episodeId = isset(episodeId, ActiveDocument.episodes[episodeId]) ? episodeId : Object.keys(ActiveDocument.episodes)[0];
+
+        Config.activeEpisode = episodeId;
+        ActiveEpisode = ActiveDocument.episodes[episodeId].config;
+
+        for (const modul of registeredModules) {
 
             const name = modul.name;
 
@@ -114,7 +116,7 @@ module.exports = {
                 $section.append(genericLineTemplate(modul, line, this.commentTemplate));
             }
 
-            OnSave(modul.onSave, () => {
+            OnSave(modul.onSave.bind(modul), () => {
                 const lines = [];
                 $(`#${name} .line`).each(function() {
                     const line = modul.defaultItemInDb();
@@ -132,19 +134,24 @@ module.exports = {
                 });
                 ActiveEpisode[name] = lines;
             });
-            OnRefresh(modul.OnRefresh.bind(modul), () => ItemInsertManager(modul.name, '.line', genericLineTemplate(modul, modul.defaultItemInDb())));
+            OnRefresh(modul.OnRefresh.bind(modul), () => ItemInsertManager(modul.contextMenuIndex, '.line', genericLineTemplate(modul, modul.defaultItemInDb())));
         }
 
-        rightClicMenu('.add-comment', '.line', item => item.toggleClass('comments-expanded'));
+        rightClicMenu(-1, '.add-comment', '.line', item => item.toggleClass('comments-expanded'));
+        rightClicMenu(-1, '.expand-ctx', '.line', item => item.toggleClass('expanded'));
 
         Refresh();
     },
     onSave() {
-        const index = Config.activeEpisode;
-        ActiveDocument.episodes[index].name = $('.episode-link').eq(index).find('a').html();
+        this.episodeDefaults();
+        $('.episode-link').each(function(order) {
+            const episodeId = $(this).data('id');
+            ActiveDocument.episodes[episodeId].order = order;
+            ActiveDocument.episodes[episodeId].name = $(this).find('a').html();
+        });
     },
     newEpisode() {
-        $('#nav-episodes').append(episodeLinkTemplate(''));
+        $('#nav-episodes').append(episodeLinkTemplate());
         this.episodeDefaults();
         Refresh();
     }

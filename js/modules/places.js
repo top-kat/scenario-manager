@@ -7,14 +7,15 @@ const sectionTemplate = (title = 'title', description = 'description') => `
 module.exports = {
     name: 'places',
     displayName: 'Places',
+    order: 4,
     contextMenuIndex: 3,
-    init() {
-        rightClicMenu('.add-section', '.line', item => {
+    onAppLoad() {
+        rightClicMenu(this.contextMenuIndex, '.add-section', '.line', item => {
             item.find('.place-sections').append(sectionTemplate());
             Refresh();
         });
-        rightClicMenu('.expand-alternative', '.line', item => item.toggleClass('expanded'));
     },
+    onDocumentLoad() {},
     defaultItemInDb() {
         return {
             name: '',

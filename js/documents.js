@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const episodes = require('./episodes');
-const { isset } = require('@cawita/data-validation-utils/src');
+const legacySupport = require('./legacy-support');
+const { isset, C } = require('@cawita/data-validation-utils/src');
 
 try {
     AppConfig = require('../data');
@@ -45,10 +46,13 @@ const documents = {
         });
         try {
             var content = JSON.parse(fs.readFileSync(fileName, 'utf-8'));
+            content = legacySupport(content);
         } catch (err) {
-            if (!noErr) alert('wrong format for file!\n\nIf you think this is an issue, please contact webmaster@nicewebagence.com');
+            C.error(err);
+            if (!noErr) ERROR('Wrong format for file!');
             else return false;
         }
+        this.rescueSave(content);
         this.setActive(content, fileName);
     },
     closeDocument() {
@@ -56,15 +60,14 @@ const documents = {
         ActiveDocument = undefined;
     },
     setActive(content, fileName) {
-        if (!content || typeof content !== 'object') return alert('Save file may have been corrupted\n\nIf you think this is an issue, please contact webmaster@nicewebagence.com');
+        if (!content || typeof content !== 'object') return ERROR('Save file may have been corrupted');
         this.save();
-        console.log(`JSON.stringify(content)`, JSON.stringify(content, null, 2));
         ActiveDocument = content;
         AppConfig.activeDocument = fileName;
         Config = ActiveDocument.config;
         if (!Config.activePanel) Config.activePanel = 'summary';
         lengthBefore = JSON.stringify(ActiveDocument, null, 2);
-        episodes.init();
+        episodes.onDocumentLoad();
         $('#no-document-overlay').hide(0);
     },
     save() {
@@ -78,7 +81,17 @@ const documents = {
             fs.writeFileSync(path.resolve(__dirname, '../data.json'), JSON.stringify(AppConfig, null, 2));
         }
     },
+    rescueSave(content) {
+        if (!isset(ActiveDocument) || !ActiveDocument) return;
+        const fileName = AppConfig.activeDocument + '.autosave';
+        const docString = content || JSON.stringify(ActiveDocument, null, 2);
+        if (!disableSave && docString.length !== lengthBefore) {
+            lengthBefore = docString.length;
+            fs.writeFileSync(fileName, docString);
+        }
+    },
 };
 
 SAVEALL = documents.save;
+RESCUESAVE = documents.rescueSave;
 module.exports = documents;
