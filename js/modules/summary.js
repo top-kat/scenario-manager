@@ -3,8 +3,8 @@ const alternativeTemplate = (title = 'Title', content = 'Content') => `
 <i class="delete-alternative">close</i>
 <i class="expand">keyboard_arrow_down</i>
 <i class="compact">keyboard_arrow_up</i>
-    <div class='alternative-title' contenteditable="true">${title}</div>
-    <div class='alternative-content' contenteditable="true">${content}</div>
+    <div class='alternative-title' contenteditable="plaintext-only">${title}</div>
+    <div class='alternative-content' contenteditable="plaintext-only">${content}</div>
 </div>
 `;
 

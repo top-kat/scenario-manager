@@ -10,7 +10,7 @@ registeredModules.sort((a, b) => a.order - b.order);
 
 const { isset, generateToken } = require('@cawita/data-validation-utils/src');
 
-const episodeLinkTemplate = (name = '', id = generateToken()) => `<div class='episode-link context-select draggable' data-id="${id}"><a contenteditable="true">${name}</a></div>`;
+const episodeLinkTemplate = (name = '', id = generateToken()) => `<div class='episode-link context-select draggable' data-id="${id}"><a contenteditable="plaintext-only">${name}</a></div>`;
 
 const newEpisodeModel = () => ({
     name: '',
@@ -28,7 +28,7 @@ const genericLineTemplate = (modul, line, commentTemplate) => `
         </div>
         <div class='new-comment flex align-items-center'>
             <i style='margin-right:15px'>add_comment</i>
-            <div class='input flex11' style='margin-right:15px' contenteditable="true"></div>
+            <div class='input flex11' style='margin-right:15px' contenteditable="plaintext-only"></div>
         </div>
     </div>
 </div>

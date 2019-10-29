@@ -29,8 +29,8 @@ module.exports = {
     lineTemplate(place = this.defaultItemInDb()) {
         return `
             <div class='place'>
-                <h2 class="place-name" contenteditable="true">${place.name}</h2>
-                <div class="place-generalDescription" contenteditable="true">${place.generalDescription}</div>
+                <h2 class="place-name" contenteditable="plaintext-only">${place.name}</h2>
+                <div class="place-generalDescription" contenteditable="plaintext-only">${place.generalDescription}</div>
                 <div class="place-sections">${place.sections.map(({title,description}) => sectionTemplate(title, description)).join('')}
                 </div>
             </div>`;

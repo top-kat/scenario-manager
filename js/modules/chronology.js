@@ -16,8 +16,8 @@ module.exports = {
     lineTemplate(date = this.defaultItemInDb()) {
         return `
             <div class='date'>
-                <div class="date-date"><b contenteditable="true">${date.date}</b></div>
-                <div class="date-description" contenteditable="true">${date.description}</div>
+                <div class="date-date"><b contenteditable="plaintext-only">${date.date}</b></div>
+                <div class="date-description" contenteditable="plaintext-only">${date.description}</div>
             </div>`;
     },
     OnRefresh() {},

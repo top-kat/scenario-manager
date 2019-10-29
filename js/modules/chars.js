@@ -18,10 +18,10 @@ module.exports = {
     lineTemplate(perso = this.defaultItemInDb()) {
         return `
             <div class='char'>
-                <div class="char-name"><b>Name:</b> <span contenteditable="true">${perso.name}</span></div>
-                <div class="char-physicalDescription"><b>Physical description:</b> <span contenteditable="true">${perso.physicalDescription}</span></div>
-                <div class="char-character"><b>Character:</b> <span contenteditable="true">${perso.character}</span></div>
-                <div class="char-history"><b>History:</b> <span contenteditable="true">${perso.history}</span></div>
+                <div class="char-name"><b>Name:</b> <span contenteditable="plaintext-only">${perso.name}</span></div>
+                <div class="char-physicalDescription"><b>Physical description:</b> <span contenteditable="plaintext-only">${perso.physicalDescription}</span></div>
+                <div class="char-character"><b>Character:</b> <span contenteditable="plaintext-only">${perso.character}</span></div>
+                <div class="char-history"><b>History:</b> <span contenteditable="plaintext-only">${perso.history}</span></div>
             </div>`;
     },
     OnRefresh() {},
