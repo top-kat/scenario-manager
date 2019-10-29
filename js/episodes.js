@@ -64,10 +64,12 @@ module.exports = {
 
         $('#nav-episodes').html('');
 
+        const episodes = [];
         for (const episodeId in ActiveDocument.episodes) {
-            const episode = ActiveDocument.episodes[episodeId];
-            $('#nav-episodes').append(episodeLinkTemplate(episode.name, episodeId));
+            episodes[ActiveDocument.episodes[episodeId].order] = { ...ActiveDocument.episodes[episodeId], episodeId };
         }
+
+        for (const episode of episodes) $('#nav-episodes').append(episodeLinkTemplate(episode.name, episode.episodeId));
 
         this.changeEpisode(Config.activeEpisode, true);
     },
@@ -146,7 +148,9 @@ module.exports = {
         this.episodeDefaults();
         $('.episode-link').each(function(order) {
             const episodeId = $(this).data('id');
-            ActiveDocument.episodes[episodeId].order = order;
+            const OrderBefore = ActiveDocument.episodes[episodeId].order;
+            ActiveDocument.episodes[episodeId].order = parseInt(order);
+            console.log(`ORDER`, OrderBefore, ActiveDocument.episodes[episodeId].order);
             ActiveDocument.episodes[episodeId].name = $(this).find('a').html();
         });
     },

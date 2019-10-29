@@ -79,10 +79,10 @@ function OnSave(...fns) {
     saveFunctions.push(...fns);
 }
 
-function SAVE() {
+function SAVE(force) {
     if (!ActiveDocument || DISABLEAUTOSAVE) return;
     for (const fn of saveFunctions) fn();
-    SAVEALL();
+    SAVEALL(force);
 }
 
 setInterval(SAVE, 1000);
@@ -101,4 +101,5 @@ function OnRefresh(...fns) {
 
 function Refresh() {
     for (const fn of refreshFunctions) fn();
+    SAVE(true);
 }

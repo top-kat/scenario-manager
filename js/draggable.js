@@ -60,6 +60,8 @@ module.exports = {
                 addDnDHandlers(dropElem);
 
                 $('.over').removeClass('over');
+
+                Refresh();
             }
             return false;
         }

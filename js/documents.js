@@ -57,6 +57,7 @@ const documents = {
     },
     closeDocument() {
         $('#no-document-overlay').show(0);
+        $('#active-document').html('');
         ActiveDocument = undefined;
     },
     setActive(content, fileName) {
@@ -64,17 +65,18 @@ const documents = {
         this.save();
         ActiveDocument = content;
         AppConfig.activeDocument = fileName;
+        $('#active-document').html(fileName.split('/').reverse()[0]);
         Config = ActiveDocument.config;
         if (!Config.activePanel) Config.activePanel = 'summary';
         lengthBefore = JSON.stringify(ActiveDocument, null, 2);
         episodes.onDocumentLoad();
         $('#no-document-overlay').hide(0);
     },
-    save() {
+    save(force = false) {
         if (!isset(ActiveDocument) || !ActiveDocument) return;
         const fileName = AppConfig.activeDocument;
         const docString = JSON.stringify(ActiveDocument, null, 2);
-        if (!disableSave && docString.length !== lengthBefore) {
+        if (!disableSave && (force || docString.length !== lengthBefore)) {
             lengthBefore = docString.length;
             fs.writeFileSync(fileName, docString);
             // SAVE APPCONFIG

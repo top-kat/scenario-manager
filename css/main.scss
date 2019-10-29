@@ -104,6 +104,14 @@ main>section {
 }
 
 #title-bar i {
+    float: right;
+}
+
+#active-document {
+    opacity: .7;
+}
+
+#title-bar i {
     -webkit-app-region: no-drag;
     font-size: 20px;
     line-height: 30px;
