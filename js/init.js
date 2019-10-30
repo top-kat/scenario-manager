@@ -12,6 +12,15 @@ const fs = require('fs');
 
 const { isset, C } = require('@cawita/data-validation-utils/src');
 
+
+const normalizedPath = path.join(__dirname, 'modules');
+
+fs.readdirSync(normalizedPath).forEach(function(file) {
+    const modul = require('./modules/' + file);
+    if (modul.active) MODULES.push(modul);
+});
+MODULES.sort((a, b) => a.order - b.order);
+
 try {
     window.addEventListener('DOMContentLoaded', () => {
 
@@ -104,6 +113,9 @@ try {
             return false;
         });
 
+        rightClicMenu(-1, '.add-comment', '.line', item => item.toggleClass('comments-expanded'));
+        rightClicMenu(-1, '.expand-ctx', '.line', item => item.toggleClass('expanded'));
+
         //----------------------------------------
         // STYLES
         //----------------------------------------
@@ -116,8 +128,9 @@ try {
             $('head').append($(`<style>${content.replace(/\$([A-Za-z0-9_]+)/g, (m,$1) => isset(theme[$1]) ?theme[$1] : C.warning(`${$1} not set in theme`) )}</style>`));
         }
 
-        episodes.onAppLoad();
-
+        //----------------------------------------
+        // MODULES LOAD
+        //----------------------------------------
         Refresh();
 
         setTimeout(() => $('#preloader').fadeOut(300), 300);

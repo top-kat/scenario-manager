@@ -1,6 +1,6 @@
 {
     "name": "scenario-manager",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "A smart, zen application to manage comics, movie or novel scenarios",
     "homepage": "http://scenario-manager.net",
     "main": "main.js",

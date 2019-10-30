@@ -1,6 +1,7 @@
 global.activeElement = null; // for right click
 global.AppConfig;
 global.ActiveEpisode = null;
+global.MODULES = [];
 global.ActiveDocument = null;
 global.Config = null;
 global.btn = btn;
