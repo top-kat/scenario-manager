@@ -18,12 +18,10 @@ module.exports = {
         // buttons
         //----------------------------------------
         btn('#new-episode', () => this.newEpisode());
-        btn('#episode-extend, #episode-extend2', () => {
+        btn('#sidebar-extend, #sidebar-extend2', () => {
             $('aside').toggleClass('expanded');
             Config.episodePanelExpanded = $('aside').hasClass('expanded');
         });
-
-        if (Config.episodePanelExpanded) $('aside').addClass('expanded');
 
         OnRefresh(() => {
             btn('.episode-link > a', item => this.changeEpisode(item.parent().data('id')));
@@ -37,24 +35,18 @@ module.exports = {
     onDocumentLoad() {
         this.episodeDefaults();
 
-        $('#nav-episodes').html('');
+        if (Config.episodePanelExpanded) $('aside').addClass('expanded');
+
+        $('.episode-sidebar-nav').html('');
 
         const episodes = [];
         for (const episodeId in ActiveDocument.episodes) {
             episodes[ActiveDocument.episodes[episodeId].order] = { ...ActiveDocument.episodes[episodeId], episodeId };
         }
 
-        for (const episode of episodes) $('#nav-episodes').append(episodeLinkTemplate(episode.name, episode.episodeId));
+        for (const episode of episodes) $('.episode-sidebar-nav').append(episodeLinkTemplate(episode.name, episode.episodeId));
 
         ActiveEpisode = ActiveDocument.episodes[Config.activeEpisode].config;
-    },
-    commentTemplate(comment) {
-        return `
-            <div class='comment'>
-                <div class='comment-user'>${comment.user}</div>
-                <div class='comment-content'>${comment.content}</div>
-                <i class='delete-parent'>close</i>
-            </div>`;
     },
     // default episodes for new ones
     episodeDefaults() {
@@ -67,14 +59,14 @@ module.exports = {
             if (!isset(ActiveDocument.episodes[newEpId])) ActiveDocument.episodes[newEpId] = newEpisodeModel();
         });
     },
-    changeEpisode(episodeId, doNotSave = false) {
-        if (!doNotSave) SAVE();
+    changeEpisode(episodeId) {
+        SAVE();
 
         episodeId = isset(episodeId, ActiveDocument.episodes[episodeId]) ? episodeId : Object.keys(ActiveDocument.episodes)[0];
 
         Config.activeEpisode = episodeId;
         ActiveEpisode = ActiveDocument.episodes[episodeId].config;
-
+        console.log(`ActiveEpisode.name`, ActiveDocument.episodes[episodeId].name);
         initModules.episodeChange();
 
         Refresh();
@@ -83,14 +75,12 @@ module.exports = {
         this.episodeDefaults();
         $('.episode-link').each(function(order) {
             const episodeId = $(this).data('id');
-            const OrderBefore = ActiveDocument.episodes[episodeId].order;
             ActiveDocument.episodes[episodeId].order = parseInt(order);
-            console.log(`ORDER`, OrderBefore, ActiveDocument.episodes[episodeId].order);
-            ActiveDocument.episodes[episodeId].name = $(this).find('a').html();
+            ActiveDocument.episodes[episodeId].name = $(this).find('a').text();
         });
     },
     newEpisode() {
-        $('#nav-episodes').append(episodeLinkTemplate());
+        $('.episode-sidebar-nav').append(episodeLinkTemplate());
         this.episodeDefaults();
         Refresh();
     }

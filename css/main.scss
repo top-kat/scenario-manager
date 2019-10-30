@@ -152,6 +152,10 @@ main>section {
     display: block;
 }
 
+#nav-main .menu-item.active {
+    color: $primaryColor;
+}
+
 aside {
     background: $asideBackground;
     position: relative;
@@ -165,15 +169,15 @@ aside.expanded {
     flex: 0 0 180px;
 }
 
-#episode-extend2 {
+#sidebar-extend2 {
     display: none;
 }
 
-aside.expanded #episode-extend2 {
+aside.expanded #sidebar-extend2 {
     display: inline-block;
 }
 
-aside.expanded #episode-extend {
+aside.expanded #sidebar-extend {
     display: none;
 }
 
@@ -194,7 +198,7 @@ main {
     background: $mainBackground;
 }
 
-aside .episode-nav-toolbar {
+aside .sidebar-nav-toolbar {
     position: absolute;
     right: 0;
     top: 0;
@@ -202,7 +206,7 @@ aside .episode-nav-toolbar {
     width: 150px;
 }
 
-aside .episode-nav-toolbar i {
+aside .sidebar-nav-toolbar i {
     display: inline-block;
     margin: 0;
 }
@@ -211,7 +215,15 @@ aside .episode-nav-toolbar i {
     display: flex;
 }
 
-#nav-episodes>a {
+.sidebar-nav>a {
+    display: block;
+}
+
+.sidebar {
+    display: none;
+}
+
+.sidebar.active {
     display: block;
 }
 
@@ -413,4 +425,12 @@ span[contenteditable] {
 
 .expanded .expand {
     display: none;
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
 }

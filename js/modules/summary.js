@@ -17,6 +17,21 @@ module.exports = {
     order: 0,
     contextMenuIndex: 1,
     byEpisode: true,
+    sideBar() {
+        return `
+        <div class="sidebar summary-sidebar">
+            <b>Episodes</b>
+            <div class="sidebar-nav-toolbar">
+                <i id='new-episode'>add</i>
+                <i id='sidebar-extend'>keyboard_arrow_right</i>
+                <i id='sidebar-extend2'>keyboard_arrow_left</i>
+            </div>
+
+            <nav class="sidebar-nav episode-sidebar-nav" data-context='4'>
+
+            </nav>
+        </div>`;
+    },
     onAppLoad() {
         rightClicMenu(this.contextMenuIndex, '.add-alternative', '.line', item => {
             item.find('.alternatives').append(alternativeTemplate());
@@ -59,8 +74,8 @@ module.exports = {
         // ALTERNATIVES
         $item.find('.alternative').each(function() {
             const $alternative = $(this);
-            const title = $alternative.find('.alternative-title').first().html();
-            const content = $alternative.find('.alternative-content').first().html();
+            const title = $alternative.find('.alternative-title').first().text();
+            const content = $alternative.find('.alternative-content').first().text();
             line.alternatives.push({ title, content });
         });
         return line;

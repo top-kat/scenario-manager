@@ -29,8 +29,8 @@ module.exports = {
     onSave() {},
     onSaveLine($item, line) {
         line.id = $item.attr('id') || generateToken();
-        line.date = $item.find('.date-date > b').first().html();
-        line.description = $item.find('.date-description').first().html();
+        line.date = $item.find('.date-date > b').first().text();
+        line.description = $item.find('.date-description').first().text();
         return line;
     }
 };

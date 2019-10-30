@@ -9,13 +9,13 @@ module.exports = function(db) {
         db.episodes = episodeAsObjects;
     }
 
-    // 1.0.4 episodes as now an order field
+    // 1.0.4 episodes has now an order field
     let i = 0;
     for (const episode in db.episodes) {
         if (!isset(db.episodes[episode].order)) db.episodes[episode].order = i++;
     }
 
-    // 1.0.6 new general module vs byEpisodes
+    // 1.0.6 modules byEpisodes or general
     for (const modul of MODULES) {
         if (modul.byEpisode && isset(db[modul.name])) {
             // merge general datas into first episode
@@ -31,8 +31,11 @@ module.exports = function(db) {
         } else if (!isset(db[modul.name]) && !modul.byEpisode) {
             // we take all episode datas to merge into general
             const episodeIds = [];
+            db[modul.name] = [];
             for (const episodeId in db.episodes) {
                 if (isset(db.episodes[episodeId].config[modul.name])) {
+                    console.log(`db[modul.name]`, db[modul.name]);
+                    console.log(`db[modul.name`, modul.name);
                     db[modul.name] = [...db[modul.name], ...db.episodes[episodeId].config[modul.name]];
                 }
                 episodeIds.push(episodeId);

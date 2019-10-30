@@ -1,19 +1,19 @@
 global.activeElement = null; // for right click
-global.AppConfig;
-global.ActiveEpisode = null;
-global.MODULES = [];
-global.ActiveDocument = null;
-global.Config = null;
-global.btn = btn;
-global.rightClicMenu = rightClicMenu;
-global.SAVEALL = () => true;
-global.RESCUESAVE = () => true;
+global.AppConfig; // stored in program files at app level
+global.Config = null; // config from user document
+global.ActiveDocument = null; // The user document full, modifiable, to be saved
+global.ActiveEpisode = null; // Episode object with all datas
+global.MODULES = []; // modules in the module folder
 global.OnSave = OnSave;
 global.SAVE = SAVE;
 global.OnRefresh = OnRefresh;
 global.Refresh = Refresh;
 global.ItemInsertManager = ItemInsertManager;
+global.rightClicMenu = rightClicMenu;
+global.btn = btn;
 global.DISABLEAUTOSAVE = false; // on error
+global.SAVEALL = () => true;
+global.RESCUESAVE = () => true;
 global.ERROR = errMsg => alert(`${errMsg}
 
 If you think this is an issue, please contact webmaster@nicewebagence.com

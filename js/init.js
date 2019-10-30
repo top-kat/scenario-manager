@@ -5,6 +5,8 @@ const { BrowserWindow, dialog } = require('electron').remote;
 
 const draggable = require('./draggable');
 const episodes = require('./episodes');
+const initModules = require('./init-modules');
+const panels = require('./panels');
 const theme = require('./theme');
 const { openInCodeEditor } = require('@cawita/data-validation-utils/src/back-end-utils');
 const path = require('path');
@@ -39,10 +41,6 @@ try {
             if (!$target.hasClass('dropdown') && !$target.closest('.dropdown,.dropdown-toggle').length) $('.dropdown').removeClass('active');
         });
 
-        if (Object.keys(AppConfig).length === 0 || !AppConfig.activeDocument) true;
-        else documents.openDocument(dialog, AppConfig.activeDocument, true);
-
-
         //----------------------------------------
         // TOOLBAR
         //----------------------------------------
@@ -56,10 +54,7 @@ try {
         OnRefresh(
             // menu items
             () => $('.menu-item').off('click').click(function() {
-                Config.activePanel = $(this).data('section');
-                $('.panel').fadeOut(50);
-                $('#' + Config.activePanel).fadeIn(50);
-                Refresh();
+                panels.set($(this).data('section'));
             }),
             // textarea auto resize
             () => $('textarea').each(function() {
@@ -77,7 +72,7 @@ try {
                         const target = $(e.target);
                         const content = target.html().replace(/<div><br><\/div>/g, '');
                         if (content) {
-                            target.closest('.comments').find('.comments-inner').append(episodes.commentTemplate({ user: '^-^', content }));
+                            target.closest('.comments').find('.comments-inner').append(initModules.commentTemplate({ user: '^-^', content }));
                         }
                         target.html('');
                     }
@@ -131,6 +126,12 @@ try {
         //----------------------------------------
         // MODULES LOAD
         //----------------------------------------
+        episodes.onAppLoad();
+        initModules.appLoad();
+
+        if (Object.keys(AppConfig).length === 0 || !AppConfig.activeDocument) true;
+        else documents.openDocument(dialog, AppConfig.activeDocument, true);
+
         Refresh();
 
         setTimeout(() => $('#preloader').fadeOut(300), 300);

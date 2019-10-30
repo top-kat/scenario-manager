@@ -8,12 +8,12 @@ module.exports = {
     order: 2,
     byEpisode: false,
     onAppLoad() {},
-    leftMenu(persos) {
-        return persos.map(p => {
-            return `<div class='menu-link' data-id="${p.id}"><a contenteditable="plaintext-only">${name}</a></div>`;
-        });
+    // sideBar() {}, this will use default sidebar
+    onDocumentLoad() {
+        $('.chars-sidebar-nav').html(ActiveDocument.chars.map(p => {
+            return `<div class='menu-link'><a href="#${p.id}">${name}</a></div>`;
+        }).join('\n'));
     },
-    onDocumentLoad() {},
     defaultItemInDb() {
         return {
             id: generateToken(),
@@ -40,10 +40,10 @@ module.exports = {
     onSave() {},
     onSaveLine($item, line) {
         line.id = $item.attr('id') || generateToken();
-        line.name = $item.find('.char-name > span').first().html();
-        line.physicalDescription = $item.find('.char-physicalDescription > span').first().html();
-        line.character = $item.find('.char-character > span').first().html();
-        line.history = $item.find('.char-history > span').first().html();
+        line.name = $item.find('.char-name > span').first().text();
+        line.physicalDescription = $item.find('.char-physicalDescription > span').first().text();
+        line.character = $item.find('.char-character > span').first().text();
+        line.history = $item.find('.char-history > span').first().text();
         return line;
 
     }

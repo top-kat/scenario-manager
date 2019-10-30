@@ -46,11 +46,11 @@ module.exports = {
     onSaveLine($item, line) {
         line.sections = [];
         line.id = $item.attr('id') || generateToken();
-        line.name = $item.find('.place-name').first().html();
-        line.generalDescription = $item.find('.place-generalDescription').first().html();
+        line.name = $item.find('.place-name').first().text();
+        line.generalDescription = $item.find('.place-generalDescription').first().text();
         $item.find('.place-section').each(function() {
-            const title = $(this).find('.place-section-title').first().html();
-            const description = $(this).find('.place-section-description').first().html();
+            const title = $(this).find('.place-section-title').first().text();
+            const description = $(this).find('.place-section-description').first().text();
             line.sections.push({ title, description });
         });
         return line;

@@ -63,11 +63,13 @@ const documents = {
     },
     setActive(content, fileName) {
         if (!content || typeof content !== 'object') return ERROR('Save file may have been corrupted');
-        this.save();
+        // this.save();
         ActiveDocument = content;
         AppConfig.activeDocument = fileName;
-        $('#active-document').html(fileName.split('/').reverse()[0]);
         Config = ActiveDocument.config;
+
+        $('#active-document').html(fileName.split('/').reverse()[0]);
+
         if (!Config.activePanel) Config.activePanel = 'summary';
         lengthBefore = JSON.stringify(ActiveDocument, null, 2);
         episodes.onDocumentLoad();
