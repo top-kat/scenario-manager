@@ -1,7 +1,7 @@
 module.exports = {
     name: 'chronology',
     displayName: 'Chronology',
-    contextMenuIndex: 2,
+    contextMenuIndex: 5,
     order: 3,
     onAppLoad() {},
     onDocumentLoad() {},
