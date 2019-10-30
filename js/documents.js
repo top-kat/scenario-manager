@@ -3,6 +3,7 @@ const path = require('path');
 const episodes = require('./episodes');
 const legacySupport = require('./legacy-support');
 const { isset, C } = require('@cawita/data-validation-utils/src');
+const initModules = require('./init-modules');
 
 try {
     AppConfig = require('../data');
@@ -70,6 +71,7 @@ const documents = {
         if (!Config.activePanel) Config.activePanel = 'summary';
         lengthBefore = JSON.stringify(ActiveDocument, null, 2);
         episodes.onDocumentLoad();
+        initModules.documentLoad();
         $('#no-document-overlay').hide(0);
     },
     save(force = false) {

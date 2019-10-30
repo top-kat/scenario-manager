@@ -1,3 +1,5 @@
+const { generateToken } = require('@cawita/data-validation-utils/src');
+
 const alternativeTemplate = (title = 'Title', content = 'Content') => `
 <div class='alternative flex11'>
 <i class="delete-alternative">close</i>
@@ -9,10 +11,12 @@ const alternativeTemplate = (title = 'Title', content = 'Content') => `
 `;
 
 module.exports = {
+    active: true,
     name: 'summary',
     displayName: 'Summary',
     order: 0,
     contextMenuIndex: 1,
+    byEpisode: true,
     onAppLoad() {
         rightClicMenu(this.contextMenuIndex, '.add-alternative', '.line', item => {
             item.find('.alternatives').append(alternativeTemplate());
@@ -23,6 +27,7 @@ module.exports = {
     onDocumentLoad() {},
     defaultItemInDb() {
         return {
+            id: generateToken(),
             comments: [],
             alternatives: [{
                 title: '',
@@ -34,7 +39,7 @@ module.exports = {
     },
     lineTemplate(summary = this.defaultItemInDb()) {
         return `
-        <div class='alternatives flex'>
+        <div id='${summary.id || generateToken()}' class='alternatives flex'>
             ${summary.alternatives.map(alt => alternativeTemplate(alt.title, alt.content)).join('')}
         </div>`;
     },
@@ -49,6 +54,7 @@ module.exports = {
     },
     onSave() {},
     onSaveLine($item, line) {
+        line.id = $item.attr('id') || generateToken();
         line.alternatives = [];
         // ALTERNATIVES
         $item.find('.alternative').each(function() {

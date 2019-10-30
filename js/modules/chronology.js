@@ -1,12 +1,17 @@
+const { generateToken } = require('@cawita/data-validation-utils/src');
+
 module.exports = {
+    active: true,
     name: 'chronology',
     displayName: 'Chronology',
     contextMenuIndex: 2,
     order: 3,
+    byEpisode: false,
     onAppLoad() {},
     onDocumentLoad() {},
     defaultItemInDb() {
         return {
+            id: generateToken(),
             date: '',
             description: '',
             comments: [],
@@ -15,7 +20,7 @@ module.exports = {
     },
     lineTemplate(date = this.defaultItemInDb()) {
         return `
-            <div class='date'>
+            <div id='${date.id || generateToken()}' class='date'>
                 <div class="date-date"><b contenteditable="plaintext-only">${date.date}</b></div>
                 <div class="date-description" contenteditable="plaintext-only">${date.description}</div>
             </div>`;
@@ -23,6 +28,7 @@ module.exports = {
     OnRefresh() {},
     onSave() {},
     onSaveLine($item, line) {
+        line.id = $item.attr('id') || generateToken();
         line.date = $item.find('.date-date > b').first().html();
         line.description = $item.find('.date-description').first().html();
         return line;
