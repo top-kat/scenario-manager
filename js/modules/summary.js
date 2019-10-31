@@ -17,14 +17,14 @@ module.exports = {
     order: 0,
     contextMenuIndex: 1,
     byEpisode: true,
-    sideBar() {
+    sidebar() {
         return `
         <div class="sidebar summary-sidebar">
             <b>Episodes</b>
             <div class="sidebar-nav-toolbar">
                 <i id='new-episode'>add</i>
-                <i id='sidebar-extend'>keyboard_arrow_right</i>
-                <i id='sidebar-extend2'>keyboard_arrow_left</i>
+                <i class='sidebar-extend'>keyboard_arrow_right</i>
+                <i class='sidebar-extend2'>keyboard_arrow_left</i>
             </div>
 
             <nav class="sidebar-nav episode-sidebar-nav" data-context='4'>

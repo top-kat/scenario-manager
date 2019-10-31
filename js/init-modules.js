@@ -35,7 +35,7 @@ module.exports = {
         for (const modul of MODULES) {
 
             // add module section
-            $('main').append(`<section id='${modul.name}' class='panel' style='${activePanel === modul.name ? '' : 'display:none'}'></section>`);
+            $('main').append(`<section id='${modul.name}' class='panel'></section>`);
             // add item in main menu
             $('#main-nav-items').append(`<li id="${modul.name}-main-menu-item" class="menu-item${activePanel === modul.name ? ' active':''}" data-section="${modul.name}">${modul.displayName}</li>`);
             // add module sidebar
@@ -44,8 +44,8 @@ module.exports = {
             <div class="sidebar ${modul.name}-sidebar">
                 <b>${modul.displayName}</b>
                 <div class="sidebar-nav-toolbar">
-                    <i id='sidebar-extend'>keyboard_arrow_right</i>
-                    <i id='sidebar-extend2'>keyboard_arrow_left</i>
+                    <i class='sidebar-extend'>keyboard_arrow_right</i>
+                    <i class='sidebar-extend2'>keyboard_arrow_left</i>
                 </div>
                 <nav class="sidebar-nav ${modul.name}-sidebar-nav"></nav>
             </div>`);
@@ -87,14 +87,8 @@ module.exports = {
             if (!db[modul.name].length) db[modul.name].push(modul.defaultItemInDb());
 
             // feed section lines
-            for (const line of db[modul.name]) {
-                if (modul.name === 'chars') {
-                    console.log(`line.name`, line.name);
-                    console.log(`genericLineTemplate(modul, line, this.commentTemplate)`, genericLineTemplate(modul, line, this.commentTemplate));
-                }
-                $section.append(genericLineTemplate(modul, line, this.commentTemplate));
-            }
-            console.log(`$section.html()`, $section, $section.html());
+            for (const line of db[modul.name]) $section.append(genericLineTemplate(modul, line, this.commentTemplate));
+
             if (!episodeChange) modul.onDocumentLoad && modul.onDocumentLoad();
         }
     },

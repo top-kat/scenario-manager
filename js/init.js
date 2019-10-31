@@ -41,6 +41,9 @@ try {
             if (!$target.hasClass('dropdown') && !$target.closest('.dropdown,.dropdown-toggle').length) $('.dropdown').removeClass('active');
         });
 
+        if (Object.keys(AppConfig).length === 0 || !AppConfig.activeDocument) true;
+        else documents.openDocument(dialog, AppConfig.activeDocument, true);
+
         //----------------------------------------
         // TOOLBAR
         //----------------------------------------
@@ -126,8 +129,8 @@ try {
         //----------------------------------------
         // MODULES LOAD
         //----------------------------------------
-        episodes.onAppLoad();
         initModules.appLoad();
+        episodes.onAppLoad();
 
         if (Object.keys(AppConfig).length === 0 || !AppConfig.activeDocument) true;
         else documents.openDocument(dialog, AppConfig.activeDocument, true);

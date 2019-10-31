@@ -18,7 +18,7 @@ module.exports = {
         // buttons
         //----------------------------------------
         btn('#new-episode', () => this.newEpisode());
-        btn('#sidebar-extend, #sidebar-extend2', () => {
+        btn('.sidebar-extend, .sidebar-extend2', () => {
             $('aside').toggleClass('expanded');
             Config.episodePanelExpanded = $('aside').hasClass('expanded');
         });
@@ -66,7 +66,6 @@ module.exports = {
 
         Config.activeEpisode = episodeId;
         ActiveEpisode = ActiveDocument.episodes[episodeId].config;
-        console.log(`ActiveEpisode.name`, ActiveDocument.episodes[episodeId].name);
         initModules.episodeChange();
 
         Refresh();

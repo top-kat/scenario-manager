@@ -8,7 +8,11 @@ module.exports = {
     order: 3,
     byEpisode: false,
     onAppLoad() {},
-    onDocumentLoad() {},
+    onDocumentLoad() {
+        $('.chronology-sidebar-nav').html(ActiveDocument.chronology.map(p => {
+            return `<div class='menu-link'><a href="#${p.id}">${p.date || '...'}</a></div>`;
+        }).join('\n'));
+    },
     defaultItemInDb() {
         return {
             id: generateToken(),

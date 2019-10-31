@@ -8,10 +8,10 @@ module.exports = {
     order: 2,
     byEpisode: false,
     onAppLoad() {},
-    // sideBar() {}, this will use default sidebar
+    // sidebar() {}, this will use default sidebar
     onDocumentLoad() {
         $('.chars-sidebar-nav').html(ActiveDocument.chars.map(p => {
-            return `<div class='menu-link'><a href="#${p.id}">${name}</a></div>`;
+            return `<div class='menu-link'><a href="#${p.id}">${p.name || '...'}</a></div>`;
         }).join('\n'));
     },
     defaultItemInDb() {
