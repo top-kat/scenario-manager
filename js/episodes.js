@@ -4,11 +4,14 @@ const { isset, generateToken } = require('@cawita/data-validation-utils/src');
 
 const episodeLinkTemplate = (name = '', id = generateToken()) => `<div class='episode-link context-select draggable' data-id="${id}"><a contenteditable="plaintext-only">${name}</a></div>`;
 
+let orderNewEpisode = 99;
+
 const newEpisodeModel = () => ({
     name: '',
     config: {
         summary: []
-    }
+    },
+    order: orderNewEpisode++,
 });
 
 
@@ -44,8 +47,10 @@ module.exports = {
             episodes[ActiveDocument.episodes[episodeId].order] = { ...ActiveDocument.episodes[episodeId], episodeId };
         }
 
-        for (const episode of episodes) $('.episode-sidebar-nav').append(episodeLinkTemplate(episode.name, episode.episodeId));
+        for (const episode of episodes)
+            if (episode) $('.episode-sidebar-nav').append(episodeLinkTemplate(episode.name, episode.episodeId));
 
+        if (!isset(ActiveDocument.episodes[Config.activeEpisode].config)) ActiveDocument.episodes[Config.activeEpisode].config = {};
         ActiveEpisode = ActiveDocument.episodes[Config.activeEpisode].config;
     },
     // default episodes for new ones
@@ -58,6 +63,8 @@ module.exports = {
             const newEpId = $(this).data('id');
             if (!isset(ActiveDocument.episodes[newEpId])) ActiveDocument.episodes[newEpId] = newEpisodeModel();
         });
+
+        if (!isset(Config.activeEpisode, ActiveDocument.episodes[Config.activeEpisode])) Config.activeEpisode = Object.keys(ActiveDocument.episodes)[0];
     },
     changeEpisode(episodeId) {
         SAVE();

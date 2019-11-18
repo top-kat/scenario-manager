@@ -60,6 +60,9 @@ const documents = {
         $('#no-document-overlay').show(0);
         $('#active-document').html('');
         ActiveDocument = undefined;
+        AppConfig.activeDocument = undefined;
+        fs.writeFileSync(path.resolve(__dirname, '../data.json'), JSON.stringify(AppConfig, null, 2));
+        window.location.reload();
     },
     setActive(content, fileName) {
         if (!content || typeof content !== 'object') return ERROR('Save file may have been corrupted');
