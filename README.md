@@ -4,7 +4,7 @@ A Linux, MacOs and Windows app to manage scenarios, novels, histories and comics
 
 [Download for Linux, Windows and MacOS on the official website](http:scenario-manager.net)
 
-![See it in action][https://gifyu.com/image/vIsv]
+![See it in action](https://gifyu.com/image/vIsv)
 
 * open-source, free, forever
 * manage your history, characters, places and chronology all in one place
