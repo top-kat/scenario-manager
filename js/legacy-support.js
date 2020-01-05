@@ -34,8 +34,6 @@ module.exports = function(db) {
             db[modul.name] = [];
             for (const episodeId in db.episodes) {
                 if (isset(db.episodes[episodeId].config[modul.name])) {
-                    console.log(`db[modul.name]`, db[modul.name]);
-                    console.log(`db[modul.name`, modul.name);
                     db[modul.name] = [...db[modul.name], ...db.episodes[episodeId].config[modul.name]];
                 }
                 episodeIds.push(episodeId);

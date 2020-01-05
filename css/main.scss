@@ -5,7 +5,9 @@ body {
 }
 
 a {
+    color: $fontColorMain;
     font-weight: bold;
+    text-decoration: none;
 }
 
 b {
@@ -15,6 +17,10 @@ b {
 i {
     font-size: 2.8rem;
     opacity: .3;
+    vertical-align: middle;
+}
+
+div {
     vertical-align: middle;
 }
 
@@ -169,15 +175,15 @@ aside.expanded {
     flex: 0 0 180px;
 }
 
-#sidebar-extend2 {
+.sidebar-extend2 {
     display: none;
 }
 
-aside.expanded #sidebar-extend2 {
+aside.expanded .sidebar-extend2 {
     display: inline-block;
 }
 
-aside.expanded #sidebar-extend {
+aside.expanded .sidebar-extend {
     display: none;
 }
 
@@ -207,7 +213,7 @@ aside .sidebar-nav-toolbar {
 }
 
 aside .sidebar-nav-toolbar i {
-    display: inline-block;
+    /* display: inline-block; */
     margin: 0;
 }
 

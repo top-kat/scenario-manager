@@ -20,7 +20,11 @@ module.exports = {
             Refresh();
         });
     },
-    onDocumentLoad() {},
+    onDocumentLoad() {
+        $('.places-sidebar-nav').html(ActiveDocument.places.map(p => {
+            return `<div class='menu-link'><a href="#${p.id}">${p.name || '...'}</a></div>`;
+        }).join('\n'));
+    },
     defaultItemInDb() {
         return {
             id: generateToken(),

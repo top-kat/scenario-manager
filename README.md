@@ -1,10 +1,10 @@
  # SCENARIO-MANAGER
 
-A smart and free application to manage comics, movie or novel scenarios
+A Linux, MacOs and Windows app to manage scenarios, novels, histories and comics
 
 [Download for Linux, Windows and MacOS on the official website](http:scenario-manager.net)
 
-![See it in action][https://media.giphy.com/media/KCRdHUUaH8yYgoxwMI/giphy.gif]
+![See it in action](https://s5.gifyu.com/images/demobe7e8bfa215866dd.gif)
 
 * open-source, free, forever
 * manage your history, characters, places and chronology all in one place
