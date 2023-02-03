@@ -28,8 +28,8 @@
     ],
     "license": "CC0-1.0",
     "devDependencies": {
-        "electron": "^15.5.5",
-        "electron-builder": "^23.3.3"
+        "electron": "^22.0.0",
+        "electron-builder": "^23.6.0"
     },
     "dependencies": {
         "@cawita/data-validation-utils": "^1.0.90",
